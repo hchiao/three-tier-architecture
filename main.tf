@@ -19,3 +19,7 @@ module "web" {
   instance_subnet         = "${module.site.instance_subnet}"
   instance_security_group = "${module.site.instance_security_group}"
 }
+
+output "public_ip" {
+  value = "${module.web.public_ip}"
+}
