@@ -2,22 +2,22 @@
 # Module Output
 # ---------------------------------------------------------------------------------------------------------------------
 
-#output "instance_subnet" {
-  #value = "${aws_subnet.subnet_c.id}"
-#}
+output "instance_subnet_b" {
+  value = "${aws_subnet.private_subnet_b.id}"
+}
 
-#output "instance_security_group" {
-  #value = "${aws_security_group.allow_http.id}"
-#}
+output "instance_subnet_c" {
+  value = "${aws_subnet.private_subnet_c.id}"
+}
 
-#output "main_vpc" {
-  #value = "${aws_vpc.main_vpc.id}"
-#}
+output "public_sg" {
+  value = "${aws_security_group.public_sg.id}"
+}
 
-#output "subnet_b" {
-  #value = "${aws_subnet.subnet_b.id}"
-#}
+output "private_sg" {
+  value = "${aws_security_group.private_sg.id}"
+}
 
-#output "subnet_c" {
-  #value = "${aws_subnet.subnet_c.id}"
-#}
+output "main_vpc" {
+  value = "${aws_vpc.main_vpc.id}"
+}
