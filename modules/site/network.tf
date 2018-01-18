@@ -73,7 +73,12 @@ resource "aws_route_table" "main_route_table" {
   }
 }
 
-resource "aws_route_table_association" "a" {
+resource "aws_route_table_association" "b" {
+  subnet_id      = "${aws_subnet.subnet_b.id}"
+  route_table_id = "${aws_route_table.main_route_table.id}"
+}
+
+resource "aws_route_table_association" "c" {
   subnet_id      = "${aws_subnet.subnet_c.id}"
   route_table_id = "${aws_route_table.main_route_table.id}"
 }

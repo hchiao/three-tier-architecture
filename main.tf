@@ -31,3 +31,6 @@ module "auto_scaling" {
   subnet_c = "${module.site.subnet_c}"
 }
 
+output "elb_dns" {
+  value = "${module.auto_scaling.elb_dns}"
+}
