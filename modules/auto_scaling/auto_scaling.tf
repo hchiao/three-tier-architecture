@@ -1,30 +1,30 @@
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE AUTO SCALING GROUP
+# AUTO SCALING GROUP
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "aws_autoscaling_group" "example" {
-  launch_configuration = "${aws_launch_configuration.example.id}"
-  vpc_zone_identifier = ["${var.subnet_b}", "${var.subnet_c}"]
+resource "aws_autoscaling_group" "autoscaling_group" {
+  launch_configuration = "${aws_launch_configuration.launch_configuration.id}"
+  vpc_zone_identifier = ["${var.private_subnet_b}", "${var.private_subnet_c}"]
   min_size             = 2
   max_size             = 10
-  load_balancers       = ["${aws_elb.example.name}"]
+  load_balancers       = ["${aws_elb.elb.name}"]
   health_check_type    = "ELB"
 
   tag {
     key                 = "Name"
-    value               = "terraform-asg-example"
+    value               = "autoscaling_group"
     propagate_at_launch = true
   }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A LAUNCH CONFIGURATION
+# LAUNCH CONFIGURATION
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "aws_launch_configuration" "example" {
+resource "aws_launch_configuration" "launch_configuration" {
   image_id        = "ami-37df2255"
   instance_type   = "t2.micro"
-  security_groups = ["${aws_security_group.instance.id}"]
+  security_groups = ["${var.private_sg}"]
 
   user_data = <<-EOF
               #!/bin/bash
@@ -38,40 +38,13 @@ resource "aws_launch_configuration" "example" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE THE SECURITY GROUP
+# ELB
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "aws_security_group" "instance" {
-  name   = "terraform-example-instance"
-  vpc_id = "${var.main_vpc}"
-
-  ingress {
-    from_port   = "${var.server_port}"
-    to_port     = "${var.server_port}"
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-# ---------------------------------------------------------------------------------------------------------------------
-# CREATE AN ELB TO ROUTE TRAFFIC ACROSS THE AUTO SCALING GROUP
-# ---------------------------------------------------------------------------------------------------------------------
-
-resource "aws_elb" "example" {
-  name               = "terraform-asg-example"
-  security_groups    = ["${aws_security_group.instance.id}"]
-  subnets            = ["${var.subnet_b}", "${var.subnet_c}"]
+resource "aws_elb" "elb" {
+  name               = "elb"
+  security_groups    = ["${var.private_sg}", "${var.public_sg}"]
+  subnets            = ["${var.public_subnet_b}", "${var.public_subnet_c}"]
 
   health_check {
     healthy_threshold   = 2
