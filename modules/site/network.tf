@@ -3,47 +3,161 @@
 # ------------------------------------------------------------------------------
 
 resource "aws_vpc" "main_vpc" {
-  cidr_block = "172.16.0.0/16"
+  cidr_block = "10.1.0.0/16"
 
   tags {
     Name = "main-vpc"
   }
 }
 
-resource "aws_internet_gateway" "gw" {
+resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.main_vpc.id}"
 
   tags {
-    Name = "gw"
+    Name = "igw"
   }
 }
 
-resource "aws_subnet" "subnet_c" {
-  vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "172.16.10.0/24"
-  availability_zone       = "ap-southeast-2c"
-  map_public_ip_on_launch = true
-
-  tags {
-    Name = "subnet-c"
-  }
+resource "aws_eip" "nat_eip_b" {
+  vpc        = true
+  depends_on = ["aws_internet_gateway.igw"]
 }
 
-resource "aws_subnet" "subnet_b" {
+resource "aws_nat_gateway" "nat_gw_b" {
+    allocation_id = "${aws_eip.nat_eip_b.id}"
+    subnet_id     = "${aws_subnet.public_subnet_b.id}"
+    depends_on    = ["aws_internet_gateway.igw"]
+}
+
+resource "aws_eip" "nat_eip_c" {
+  vpc        = true
+  depends_on = ["aws_internet_gateway.igw"]
+}
+
+resource "aws_nat_gateway" "nat_gw_c" {
+    allocation_id = "${aws_eip.nat_eip_c.id}"
+    subnet_id     = "${aws_subnet.public_subnet_c.id}"
+    depends_on    = ["aws_internet_gateway.igw"]
+}
+
+# ------------------------------------------------------------------------------
+# PUBLIC SUBNETS
+# ------------------------------------------------------------------------------
+
+resource "aws_subnet" "public_subnet_b" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "172.16.11.0/24"
+  cidr_block              = "10.1.1.0/24"
   availability_zone       = "ap-southeast-2b"
   map_public_ip_on_launch = true
 
   tags {
-    Name = "subnet-b"
+    Name = "public-subnet-b"
   }
 }
 
-resource "aws_security_group" "allow_http" {
-  name        = "allow_http"
-  description = "Allow http inbound traffic"
-  vpc_id      = "${aws_vpc.main_vpc.id}"
+resource "aws_subnet" "public_subnet_c" {
+  vpc_id                  = "${aws_vpc.main_vpc.id}"
+  cidr_block              = "10.1.2.0/24"
+  availability_zone       = "ap-southeast-2c"
+  map_public_ip_on_launch = true
+
+  tags {
+    Name = "public-subnet-c"
+  }
+}
+
+resource "aws_route_table" "public_route_table" {
+  vpc_id = "${aws_vpc.main_vpc.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.igw.id}"
+  }
+
+  tags {
+    Name = "public-route-table"
+  }
+}
+
+resource "aws_route_table_association" "public_b" {
+  subnet_id      = "${aws_subnet.public_subnet_b.id}"
+  route_table_id = "${aws_route_table.public_route_table.id}"
+}
+
+resource "aws_route_table_association" "public_c" {
+  subnet_id      = "${aws_subnet.public_subnet_c.id}"
+  route_table_id = "${aws_route_table.public_route_table.id}"
+}
+
+# ------------------------------------------------------------------------------
+# PRIVATE SUBNETS
+# ------------------------------------------------------------------------------
+
+resource "aws_subnet" "private_subnet_b" {
+  vpc_id                  = "${aws_vpc.main_vpc.id}"
+  cidr_block              = "10.1.3.0/24"
+  availability_zone       = "ap-southeast-2b"
+  map_public_ip_on_launch = false
+
+  tags {
+    Name = "private_subnet_b"
+  }
+}
+
+resource "aws_subnet" "private_subnet_c" {
+  vpc_id                  = "${aws_vpc.main_vpc.id}"
+  cidr_block              = "10.1.4.0/24"
+  availability_zone       = "ap-southeast-2c"
+  map_public_ip_on_launch = false
+
+  tags {
+    Name = "private_subnet_c"
+  }
+}
+
+resource "aws_route_table" "private_route_table_b" {
+  vpc_id = "${aws_vpc.main_vpc.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.nat_gw_b.id}"
+  }
+
+  tags {
+    Name = "private-route-table"
+  }
+}
+
+resource "aws_route_table_association" "private_b" {
+  subnet_id      = "${aws_subnet.private_subnet_b.id}"
+  route_table_id = "${aws_route_table.private_route_table_b.id}"
+}
+
+resource "aws_route_table" "private_route_table_c" {
+  vpc_id = "${aws_vpc.main_vpc.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.nat_gw_c.id}"
+  }
+
+  tags {
+    Name = "private-route-table"
+  }
+}
+
+resource "aws_route_table_association" "private_c" {
+  subnet_id      = "${aws_subnet.private_subnet_c.id}"
+  route_table_id = "${aws_route_table.private_route_table_c.id}"
+}
+
+# ------------------------------------------------------------------------------
+# PUBLIC SECURITY GROUP
+# ------------------------------------------------------------------------------
+
+resource "aws_security_group" "public_sg" {
+  name   = "public_sg"
+  vpc_id = "${aws_vpc.main_vpc.id}"
 
   ingress {
     from_port   = "${var.server_port}"
@@ -60,25 +174,25 @@ resource "aws_security_group" "allow_http" {
   }
 }
 
-resource "aws_route_table" "main_route_table" {
+# ------------------------------------------------------------------------------
+# PRIVATE SECURITY GROUP
+# ------------------------------------------------------------------------------
+
+resource "aws_security_group" "private_sg" {
+  name   = "private_sg"
   vpc_id = "${aws_vpc.main_vpc.id}"
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.gw.id}"
+  ingress {
+    from_port = "${var.server_port}"
+    to_port   = "${var.server_port}"
+    protocol  = "tcp"
+    self      = true
   }
 
-  tags {
-    Name = "main-route-table"
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-resource "aws_route_table_association" "b" {
-  subnet_id      = "${aws_subnet.subnet_b.id}"
-  route_table_id = "${aws_route_table.main_route_table.id}"
-}
-
-resource "aws_route_table_association" "c" {
-  subnet_id      = "${aws_subnet.subnet_c.id}"
-  route_table_id = "${aws_route_table.main_route_table.id}"
 }

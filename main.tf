@@ -24,13 +24,13 @@ module "site" {
   #value = "${module.web.public_ip}"
 #}
 
-module "auto_scaling" {
-  source = "./modules/auto_scaling"
-  main_vpc = "${module.site.main_vpc}"
-  subnet_b = "${module.site.subnet_b}"
-  subnet_c = "${module.site.subnet_c}"
-}
+#module "auto_scaling" {
+  #source = "./modules/auto_scaling"
+  #main_vpc = "${module.site.main_vpc}"
+  #subnet_b = "${module.site.subnet_b}"
+  #subnet_c = "${module.site.subnet_c}"
+#}
 
-output "elb_dns" {
-  value = "${module.auto_scaling.elb_dns}"
-}
+#output "elb_dns" {
+  #value = "${module.auto_scaling.elb_dns}"
+#}
