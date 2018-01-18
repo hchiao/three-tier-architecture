@@ -18,6 +18,10 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
+# ------------------------------------------------------------------------------
+# NAT GATEWAYS
+# ------------------------------------------------------------------------------
+
 resource "aws_eip" "nat_eip_b" {
   vpc        = true
   depends_on = ["aws_internet_gateway.igw"]
@@ -65,6 +69,10 @@ resource "aws_subnet" "public_subnet_c" {
     Name = "public-subnet-c"
   }
 }
+
+# ------------------------------------------------------------------------------
+# PUBLIC ROUTE TABLES
+# ------------------------------------------------------------------------------
 
 resource "aws_route_table" "public_route_table" {
   vpc_id = "${aws_vpc.main_vpc.id}"
@@ -114,6 +122,10 @@ resource "aws_subnet" "private_subnet_c" {
     Name = "private_subnet_c"
   }
 }
+
+# ------------------------------------------------------------------------------
+# PRIVATE ROUTE TABLES
+# ------------------------------------------------------------------------------
 
 resource "aws_route_table" "private_route_table_b" {
   vpc_id = "${aws_vpc.main_vpc.id}"
