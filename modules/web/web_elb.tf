@@ -28,7 +28,7 @@ resource "aws_launch_configuration" "launch_configuration" {
 
   user_data = <<-EOF
               #!/bin/bash
-              echo "Hello Deloitte DPE!" > index.html
+              echo "Hello Deloitte Platform Engineering!" > index.html
               nohup busybox httpd -f -p "${var.server_port}" &
               EOF
 
