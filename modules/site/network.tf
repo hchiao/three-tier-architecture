@@ -3,7 +3,9 @@
 # ------------------------------------------------------------------------------
 
 resource "aws_vpc" "main_vpc" {
-  cidr_block = "10.1.0.0/16"
+  cidr_block           = "10.1.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 
   tags {
     Name = "main-vpc"
@@ -178,6 +180,13 @@ resource "aws_security_group" "public_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -199,6 +208,13 @@ resource "aws_security_group" "private_sg" {
     to_port   = "${var.server_port}"
     protocol  = "tcp"
     self      = true
+  }
+
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -235,10 +251,19 @@ resource "aws_network_acl" "public_acl" {
     to_port    = 80
   }
 
-  # For ephemeral ports
   ingress {
     protocol   = "tcp"
     rule_no    = 110
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  # For ephemeral ports
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 120
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 1024
@@ -257,6 +282,15 @@ resource "aws_network_acl" "public_acl" {
   egress {
     protocol   = "tcp"
     rule_no    = 110
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 120
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 1024
@@ -288,10 +322,19 @@ resource "aws_network_acl" "private_acl" {
     to_port    = 80
   }
 
-  # For ephemeral ports
   ingress {
     protocol   = "tcp"
     rule_no    = 110
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  # For ephemeral ports
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 120
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 1024
@@ -310,6 +353,15 @@ resource "aws_network_acl" "private_acl" {
   egress {
     protocol   = "tcp"
     rule_no    = 110
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 443
+    to_port    = 443
+  }
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 120
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 1024
