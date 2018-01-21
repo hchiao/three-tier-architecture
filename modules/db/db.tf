@@ -1,4 +1,5 @@
 resource "aws_db_instance" "postgres_rds" {
+  #depends_on             = ["${var.db_security_group}"]
   allocated_storage      = 10
   identifier             = "mydb-rds"
   storage_type           = "gp2"
