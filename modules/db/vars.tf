@@ -5,3 +5,15 @@ variable "main_vpc" {
 variable "password" {
   description = "RDS password"
 }
+
+variable "db_subnet_b" {
+  description = "db_subnet_b"
+}
+
+variable "db_subnet_c" {
+  description = "db_subnet_c"
+}
+
+variable "db_security_group" {
+  description = "db_security_group"
+}

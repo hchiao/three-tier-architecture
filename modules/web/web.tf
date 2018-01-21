@@ -32,7 +32,7 @@ resource "aws_launch_configuration" "launch_configuration" {
               #!/bin/bash
               #cd /tmp
               echo "Hello Deloitte Platform Engineering!" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
+              nohup busybox httpd -f -p 80 &
               wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
               sudo dpkg -i amazon-ssm-agent.deb
               sudo systemctl enable amazon-ssm-agent
@@ -93,13 +93,13 @@ resource "aws_elb" "elb" {
     unhealthy_threshold = 2
     timeout             = 3
     interval            = 30
-    target              = "HTTP:${var.server_port}/"
+    target              = "HTTP:80/"
   }
 
   listener {
     lb_port           = 80
     lb_protocol       = "http"
-    instance_port     = "${var.server_port}"
+    instance_port     = 80
     instance_protocol = "http"
   }
 }

@@ -22,6 +22,14 @@ output "private_subnet_c" {
   value = "${aws_subnet.private_subnet_c.id}"
 }
 
+output "db_subnet_b" {
+  value = "${aws_subnet.private_subnet_b.id}"
+}
+
+output "db_subnet_c" {
+  value = "${aws_subnet.private_subnet_c.id}"
+}
+
 output "public_sg" {
   value = "${aws_security_group.public_sg.id}"
 }

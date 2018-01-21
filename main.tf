@@ -30,9 +30,12 @@ output "elb_dns" {
 }
 
 module "db" {
-  source   = "./modules/db"
-  main_vpc = "${module.site.main_vpc}"
-  password = "${var.password}"
+  source            = "./modules/db"
+  main_vpc          = "${module.site.main_vpc}"
+  db_subnet_b       = "${module.site.db_subnet_b}"
+  db_subnet_c       = "${module.site.db_subnet_c}"
+  db_security_group = "${module.site.private_sg}"
+  password          = "${var.password}"
 }
 
 output "rds_endpoint" {
