@@ -16,21 +16,20 @@ module "network" {
 
 module "web" {
   source           = "./modules/web"
-  main_vpc         = "${module.site.main_vpc}"
-  public_subnet_b  = "${module.site.public_subnet_b}"
-  public_subnet_c  = "${module.site.public_subnet_c}"
-  private_subnet_b = "${module.site.private_subnet_b}"
-  private_subnet_c = "${module.site.private_subnet_c}"
-  public_sg        = "${module.site.public_sg}"
-  private_sg       = "${module.site.private_sg}"
+  public_subnet_b  = "${module.network.public_subnet_b}"
+  public_subnet_c  = "${module.network.public_subnet_c}"
+  private_subnet_b = "${module.network.private_subnet_b}"
+  private_subnet_c = "${module.network.private_subnet_c}"
+  public_sg        = "${module.network.public_sg}"
+  private_sg       = "${module.network.private_sg}"
 }
 
 module "db" {
   source            = "./modules/db"
-  main_vpc          = "${module.site.main_vpc}"
-  db_subnet_b       = "${module.site.db_subnet_b}"
-  db_subnet_c       = "${module.site.db_subnet_c}"
-  db_security_group = "${module.site.private_sg}"
+  main_vpc          = "${module.network.main_vpc}"
+  db_subnet_b       = "${module.network.db_subnet_b}"
+  db_subnet_c       = "${module.network.db_subnet_c}"
+  db_security_group = "${module.network.private_sg}"
   password          = "${var.password}"
 }
 
