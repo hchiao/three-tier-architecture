@@ -32,4 +32,9 @@ output "elb_dns" {
 module "db" {
   source   = "./modules/db"
   main_vpc = "${module.site.main_vpc}"
+  password = "${var.password}"
+}
+
+output "rds_endpoint" {
+  value = "${module.db.rds_endpoint}"
 }
