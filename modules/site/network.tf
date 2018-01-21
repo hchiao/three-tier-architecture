@@ -132,7 +132,7 @@ resource "aws_subnet" "db_subnet_b" {
   map_public_ip_on_launch = false
 
   tags {
-    Name = "private_subnet_b"
+    Name = "db_subnet_b"
   }
 }
 
@@ -143,7 +143,7 @@ resource "aws_subnet" "db_subnet_c" {
   map_public_ip_on_launch = false
 
   tags {
-    Name = "private_subnet_c"
+    Name = "db_subnet_c"
   }
 }
 
@@ -340,9 +340,7 @@ resource "aws_network_acl" "private_acl" {
   vpc_id = "${aws_vpc.main_vpc.id}"
   subnet_ids = [
       "${aws_subnet.private_subnet_c.id}",
-      "${aws_subnet.private_subnet_b.id}",
-      "${aws_subnet.db_subnet_b.id}",
-      "${aws_subnet.db_subnet_c.id}"
+      "${aws_subnet.private_subnet_b.id}"
   ]
 
   ingress {
