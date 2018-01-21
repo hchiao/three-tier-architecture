@@ -28,3 +28,8 @@ module "web" {
 output "elb_dns" {
   value = "${module.web.elb_dns}"
 }
+
+module "db" {
+  source   = "./modules/db"
+  main_vpc = "${module.site.main_vpc}"
+}
