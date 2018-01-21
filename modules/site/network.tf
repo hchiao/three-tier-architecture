@@ -411,7 +411,7 @@ resource "aws_network_acl" "private_acl" {
 
   egress {
     protocol   = "tcp"
-    rule_no    = 120
+    rule_no    = 130
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 5432
