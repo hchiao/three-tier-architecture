@@ -1,7 +1,7 @@
-
-
-Command line:
+Commands:
+terraform init
 terraform apply -var password=<db_password>>
+terraform destroy -var password=<db_password>>
 
 DB query example:
 PGPASSWORD=<db_password> psql -h <rds_endpoint> mydb foo \
