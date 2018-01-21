@@ -10,8 +10,8 @@ provider "aws" {
 # RUNNING MODULES
 # ------------------------------------------------------------------------------
 
-module "site" {
-  source = "./modules/site"
+module "network" {
+  source = "./modules/network"
 }
 
 module "web" {
@@ -25,10 +25,6 @@ module "web" {
   private_sg       = "${module.site.private_sg}"
 }
 
-output "elb_dns" {
-  value = "${module.web.elb_dns}"
-}
-
 module "db" {
   source            = "./modules/db"
   main_vpc          = "${module.site.main_vpc}"
@@ -36,6 +32,10 @@ module "db" {
   db_subnet_c       = "${module.site.db_subnet_c}"
   db_security_group = "${module.site.private_sg}"
   password          = "${var.password}"
+}
+
+output "elb_dns" {
+  value = "${module.web.elb_dns}"
 }
 
 output "rds_endpoint" {

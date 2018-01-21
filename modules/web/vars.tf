@@ -1,7 +1,3 @@
-variable "main_vpc" {
-    type = "string"
-}
-
 variable "public_subnet_b" {
     type = "string"
 }
