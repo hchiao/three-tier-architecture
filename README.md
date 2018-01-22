@@ -16,11 +16,10 @@ PGPASSWORD=<db_password> psql -h <rds_endpoint> mydb foo \
 
 # Three Tier Architecture
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](https://image.slidesharecdn.com/webinarawsvsazure2015-04-08-150408164237-conversion-gate01/95/azure-vs-aws-best-practices-what-you-need-to-know-23-638.jpg?cb=1428512020)
 
 This is an implementation of the classic three tier architecture for application hosting
-![c](https://image.slidesharecdn.com/webinarawsvsazure2015-04-08-150408164237-conversion-gate01/95/azure-vs-aws-best-practices-what-you-need-to-know-23-638.jpg?cb=1428512020 “three tier arch”)
-There are three modules that constructs our architecture:
+Three modules that constructs our architecture:
 * network: link
 * web: link
 * db: link
