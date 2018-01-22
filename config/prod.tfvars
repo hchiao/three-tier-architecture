@@ -10,4 +10,7 @@ username              = "prodfoo"
 instance_class        = "db.t2.medium"
 multi_az              = "true"
 allocated_storage     = "12"
-skip_final_snapshot   = "false"
+skip_final_snapshot   = "true"
+
+#Cannot currently set to true due to issue: https://github.com/hashicorp/terraform/issues/5417
+#skip_final_snapshot   = "false""
