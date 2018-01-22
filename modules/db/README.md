@@ -23,3 +23,22 @@ This module deploys PostgreSQL Database using AWS RDS
 | Name         | Description   |
 | ------       | ------------- |
 | rds_endpoint |               |
+
+--------
+
+### Run Command
+After deployment, we can test the db connection using AWS Run Command.
+Access the Run Command section in ec2 and select an instance to run command.
+Then try the folloing DB query:
+```
+PGPASSWORD=<db_password> psql -h <rds_endpoint> mydb foo \
+-c "CREATE TABLE account(
+ user_id serial PRIMARY KEY,
+ username VARCHAR (50) UNIQUE NOT NULL,
+ password VARCHAR (50) NOT NULL,
+ email VARCHAR (355) UNIQUE NOT NULL,
+ created_on TIMESTAMP NOT NULL,
+ last_login TIMESTAMP
+);"
+```
+[For more information on Run command click here](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
