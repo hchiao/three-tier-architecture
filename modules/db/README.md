@@ -10,19 +10,23 @@ This module deploys PostgreSQL Database using AWS RDS.
 
 ## Inputs
 
-| Name              | Description                                    | Type   | Default | Required |
-| ------            | -------------                                  | :----: | :-----: | :-----:  |
-| db_security_group | db_security_group                              | string | -       | yes      |
-| db_subnet_b       | db_subnet_b                                    | string | -       | yes      |
-| db_subnet_c       | db_subnet_c                                    | string | -       | yes      |
-| main_vpc          | The port the server will use for HTTP requests | string | -       | yes      |
-| password          | RDS password                                   | string | -       | yes      |
+| Name                | Description                                           | Type   | Default | Required |
+| ------              | -------------                                         | :----: | :-----: | :-----:  |
+| allocated_storage   | The amount of allocated storage                       | string | -       | yes      |
+| db_security_group   | db_security_group                                     | string | -       | yes      |
+| db_subnet_b         | db_subnet_b                                           | string | -       | yes      |
+| db_subnet_c         | db_subnet_c                                           | string | -       | yes      |
+| instance_class      | RDS instance class (e.g. db.t2.micro or db.m4.xlarge) | string | -       | yes      |
+| multi_az            | Create a replica in different zone if set to true     | string | -       | yes      |
+| password            | RDS password                                          | string | -       | yes      |
+| skip_final_snapshot | Creates a snapshot when db is deleted if set to true  | string | -       | yes      |
+| username            | RDS username                                          | string | -       | yes      |
 
 ## Outputs
 
 | Name         | Description   |
 | ------       | ------------- |
-| rds_endpoint |               |
+| rds_endpoint | RDS endpoint  |
 
 --------
 

@@ -14,21 +14,20 @@ We use spot instance to keep costs low.
 | Instance Profile      | IAM Instance Profile that is attached to instances
 | IAM Role              | The instance role that is attached to Instance Profile, it defines permission to interact with AWS System Manager (run command)
 
-
 ## Inputs
 
-| Name             | Description   | Type   | Default | Required |
-| ------           | ------------- | :----: | :-----: | :-----:  |
-| private_sg       |               | string | -       | yes      |
-| private_subnet_b |               | string | -       | yes      |
-| private_subnet_c |               | string | -       | yes      |
-| public_sg        |               | string | -       | yes      |
-| public_subnet_b  |               | string | -       | yes      |
-| public_subnet_c  |               | string | -       | yes      |
+| Name             | Description                   | Type   | Default | Required |
+| ------           | -------------                 | :----: | :-----: | :-----:  |
+| private_sg       | The private security group id | string | -       | yes      |
+| private_subnet_b | The private subnet b id       | string | -       | yes      |
+| private_subnet_c | The private subnet c id       | string | -       | yes      |
+| public_sg        | The public security group id  | string | -       | yes      |
+| public_subnet_b  | The public subnet b id        | string | -       | yes      |
+| public_subnet_c  | The public subnet c id        | string | -       | yes      |
 
 ## Outputs
 
-| Name    | Description   |
-| ------  | ------------- |
-| elb_dns |               |
+| Name    | Description               |
+| ------  | -------------             |
+| elb_dns | Elastic Load Balancer DNS |
 
