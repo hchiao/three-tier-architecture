@@ -1,6 +1,5 @@
 # Three Tier Architecture
-
-![image](https://media.amazonwebservices.com/architecturecenter/AWS_ac_ra_web_01.pdf)
+[AWS Three Tier Architecture Reference](https://media.amazonwebservices.com/architecturecenter/AWS_ac_ra_web_01.pdf)
 
 This is an implementation of the classic three tier architecture for application hosting
 Three modules that constructs our architecture:
