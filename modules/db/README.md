@@ -1,5 +1,5 @@
 # db
-This module deploys PostgreSQL Database using AWS RDS
+This module deploys PostgreSQL Database using AWS RDS.
 
 ## What gets deployed
 | Resource            | Description
@@ -41,4 +41,4 @@ PGPASSWORD=<db_password> psql -h <rds_endpoint> mydb foo \
  last_login TIMESTAMP
 );"
 ```
-[For more information on Run command click here](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
+[For more information on Run Command click here](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)

@@ -1,5 +1,5 @@
 # network
-This module deploys all the network resources
+This module deploys all the network resources.
 We deploy on two availability zones
 
 ## What gets deployed

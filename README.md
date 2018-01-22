@@ -23,9 +23,6 @@ Run commands to deploy:
 
 [Learn more Terraform command here](https://www.terraform.io/docs/commands/index.html)
 
-## Configuring
-what can be configured init
-
 ## Inputs
 
 | Name     | Description   | Type   | Default | Required |
