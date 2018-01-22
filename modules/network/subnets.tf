@@ -4,7 +4,7 @@
 
 resource "aws_subnet" "public_subnet_b" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "10.1.1.0/24"
+  cidr_block              = "${var.public_subnet_b_cidr}"
   availability_zone       = "ap-southeast-2b"
   map_public_ip_on_launch = true
 
@@ -15,7 +15,7 @@ resource "aws_subnet" "public_subnet_b" {
 
 resource "aws_subnet" "public_subnet_c" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "10.1.2.0/24"
+  cidr_block              = "${var.public_subnet_c_cidr}"
   availability_zone       = "ap-southeast-2c"
   map_public_ip_on_launch = true
 
@@ -57,7 +57,7 @@ resource "aws_route_table_association" "public_c" {
 
 resource "aws_subnet" "private_subnet_b" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "10.1.3.0/24"
+  cidr_block              = "${var.private_subnet_b_cidr}"
   availability_zone       = "ap-southeast-2b"
   map_public_ip_on_launch = false
 
@@ -68,7 +68,7 @@ resource "aws_subnet" "private_subnet_b" {
 
 resource "aws_subnet" "private_subnet_c" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "10.1.4.0/24"
+  cidr_block              = "${var.private_subnet_c_cidr}"
   availability_zone       = "ap-southeast-2c"
   map_public_ip_on_launch = false
 
@@ -79,7 +79,7 @@ resource "aws_subnet" "private_subnet_c" {
 
 resource "aws_subnet" "db_subnet_b" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "10.1.5.0/24"
+  cidr_block              = "${var.db_subnet_b_cidr}"
   availability_zone       = "ap-southeast-2b"
   map_public_ip_on_launch = false
 
@@ -90,7 +90,7 @@ resource "aws_subnet" "db_subnet_b" {
 
 resource "aws_subnet" "db_subnet_c" {
   vpc_id                  = "${aws_vpc.main_vpc.id}"
-  cidr_block              = "10.1.6.0/24"
+  cidr_block              = "${var.db_subnet_c_cidr}"
   availability_zone       = "ap-southeast-2c"
   map_public_ip_on_launch = false
 

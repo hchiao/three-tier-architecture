@@ -15,7 +15,7 @@ Setup:
 * Clone this project
 
 Run commands to deploy:
-* ```env=dev```
+* ```export env=dev```
 * ```terraform get -update=true```
 * ```terraform init -backend-config=config/backend-${env}.conf```
 * ```terraform plan -var-file=config/${env}.tfvars```
@@ -25,13 +25,25 @@ Run commands to deploy:
 
 ## Inputs
 
-| Name     | Description   | Type   | Default | Required |
-| ------   | ------------- | :----: | :-----: | :-----:  |
-| password | RDS password  | string | -       | yes      |
+| Name                  | Description                                           | Type   | Default | Required |
+| ------                | -------------                                         | :----: | :-----: | :-----:  |
+| allocated_storage     | The amount of allocated storage                       | string | -       | yes      |
+| db_subnet_b_cidr      | The cidr range for db subnet b                        | string | -       | yes      |
+| db_subnet_c_cidr      | The cidr range for db subnet c                        | string | -       | yes      |
+| instance_class        | RDS instance class (e.g. db.t2.micro or db.m4.xlarge) | string | -       | yes      |
+| multi_az              | Create a replica in different zone if set to true     | string | -       | yes      |
+| password              | RDS password                                          | string | -       | yes      |
+| private_subnet_b_cidr | The cidr range for private subnet b                   | string | -       | yes      |
+| private_subnet_c_cidr | The cidr range for private subnet c                   | string | -       | yes      |
+| public_subnet_b_cidr  | The cidr range for public subnet b                    | string | -       | yes      |
+| public_subnet_c_cidr  | The cidr range for public subnet c                    | string | -       | yes      |
+| skip_final_snapshot   | Creates a snapshot when db is deleted if set to true  | string | -       | yes      |
+| username              | RDS username                                          | string | -       | yes      |
+| vpc_cidr              | The cidr range for vpc                                | string | -       | yes      |
 
 ## Outputs
 
-| Name         | Description   |
-| ------       | ------------- |
-| elb_dns      |               |
-| rds_endpoint |               |
+| Name         | Description               |
+| ------       | -------------             |
+| elb_dns      | Elastic Load Balancer DNS |
+| rds_endpoint | RDS endpoint              |

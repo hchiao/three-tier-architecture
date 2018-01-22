@@ -1,21 +1,29 @@
 variable "public_subnet_b" {
-    type = "string"
+  description = "The public subnet b id"
+  type = "string"
 }
 
 variable "public_subnet_c" {
-    type = "string"
+  description = "The public subnet c id"
+  type = "string"
 }
+
 variable "private_subnet_b" {
-    type = "string"
+  description = "The private subnet b id"
+  type = "string"
 }
+
 variable "private_subnet_c" {
-    type = "string"
+  description = "The private subnet c id"
+  type = "string"
 }
 
 variable "public_sg" {
-    type = "string"
+  description = "The public security group id"
+  type = "string"
 }
 
 variable "private_sg" {
-    type = "string"
+  description = "The private security group id"
+  type = "string"
 }
