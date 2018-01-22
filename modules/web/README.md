@@ -1,7 +1,7 @@
 # web
 
 This module deploys the application, the application is running in an auto scaling group.
-The auto scaling group will guarantee at lease one instance is running in each availability zone.
+The auto scaling group will guarantee at least one instance is running per availability zone.
 We run an example application on httpd behind an Elastic Load Balancer.
 We use spot instance to keep costs low.
 
