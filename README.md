@@ -24,10 +24,17 @@ Three modules that constructs our architecture:
 * web: link
 * db: link
 
-## Deploying
+## How to deploying
+* [Install Terraform](https://www.terraform.io/intro/getting-started/install.html)
+* Setup your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environmental variables
+* Clone this project
 
-Install t link https://something (or image)
-Run this command
+Run the following command to deploy
+* ```env=dev```
+* ```terraform get -update=true```
+* ```terraform init -backend-config=config/backend-${env}.conf```
+* ```terraform plan -var-file=config/${env}.tfvars```
+* ```terraform apply -var-file=config/${env}.tfvars```
 
 ## Configuring
 what can be configured init
