@@ -11,15 +11,13 @@ Three modules that constructs our architecture:
 
 Setup:
 * [Install Terraform](https://www.terraform.io/intro/getting-started/install.html)
-* Setup your ```AWS_ACCESS_KEY_ID``` and ```AWS_SECRET_ACCESS_KEY``` environmental variables
+* Setup your ```AWS_ACCESS_KEY_ID``` and ```AWS_SECRET_ACCESS_KEY``` environmental variables. (Assuming have full permission)
+* [Run three-tier-init](https://github.com/hchiao/three-tier-init)
 * Clone this project
 
 Run commands to deploy:
-* ```export env=dev```
-* ```terraform get -update=true```
-* ```terraform init -backend-config=config/backend-${env}.conf```
-* ```terraform plan -var-file=config/${env}.tfvars```
-* ```terraform apply -var-file=config/${env}.tfvars```
+* ```terraform init -backend-config=config/backend-dev.conf```
+* ```terraform apply -var-file=config/dev.tfvars```
 
 [Learn more Terraform command here](https://www.terraform.io/docs/commands/index.html)
 

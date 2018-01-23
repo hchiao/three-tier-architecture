@@ -35,7 +35,7 @@ After deployment, we can test the db connection using AWS Run Command.
 Access the Run Command section in aws ec2 and select an instance to run a command.
 Sample command could be the folloing DB query:
 ```
-PGPASSWORD=<db_password> psql -h <rds_endpoint> mydb foo \
+PGPASSWORD=<db_password> psql -h <rds_endpoint> <db name> <username> \
 -c "CREATE TABLE account(
  user_id serial PRIMARY KEY,
  username VARCHAR (50) UNIQUE NOT NULL,
