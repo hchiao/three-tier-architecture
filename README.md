@@ -7,7 +7,7 @@ Three modules that constructs our architecture:
 * [web](https://github.com/hchiao/three-tier-architecture/tree/master/modules/web)
 * [db](https://github.com/hchiao/three-tier-architecture/tree/master/modules/db)
 
-## How to deploying
+## How to deploy
 
 Setup:
 * [Install Terraform](https://www.terraform.io/intro/getting-started/install.html)
