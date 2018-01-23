@@ -6,6 +6,15 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
+#data "terraform_remote_state" "stack" {
+  #backend = "s3"
+  #config{
+    #bucket = "three-tier-architecture-bucket"
+    #key = "dev/terraform.tfstate"
+    #region="ap-southeast-2"
+  #}
+#}
+
 # ------------------------------------------------------------------------------
 # RUNNING MODULES
 # ------------------------------------------------------------------------------

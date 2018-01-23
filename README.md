@@ -16,8 +16,9 @@ Setup:
 * Clone this project
 
 Run commands to deploy:
-* ```terraform init -backend-config=config/backend-dev.conf```
-* ```terraform apply -var-file=config/dev.tfvars```
+* ```export env=dev (or prod)```
+* ```terraform init -backend-config=config/backend-${env}.conf```
+* ```terraform apply -var-file=config/${env}.tfvars```
 
 [Learn more Terraform command here](https://www.terraform.io/docs/commands/index.html)
 
