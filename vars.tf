@@ -1,3 +1,8 @@
+variable "env" {
+  description = "The environment to deploy"
+  type = "string"
+}
+
 variable "vpc_cidr" {
   description = "The cidr range for vpc"
   type = "string"

@@ -62,7 +62,7 @@ resource "aws_subnet" "private_subnet_b" {
   map_public_ip_on_launch = false
 
   tags {
-    Name = "private_subnet_b"
+    Name = "private-subnet-b"
   }
 }
 
@@ -73,7 +73,7 @@ resource "aws_subnet" "private_subnet_c" {
   map_public_ip_on_launch = false
 
   tags {
-    Name = "private_subnet_c"
+    Name = "private-subnet-c"
   }
 }
 
@@ -84,7 +84,7 @@ resource "aws_subnet" "db_subnet_b" {
   map_public_ip_on_launch = false
 
   tags {
-    Name = "private_subnet_b"
+    Name = "db-subnet-b"
   }
 }
 
@@ -95,7 +95,7 @@ resource "aws_subnet" "db_subnet_c" {
   map_public_ip_on_launch = false
 
   tags {
-    Name = "private_subnet_c"
+    Name = "db-subnet-c"
   }
 }
 

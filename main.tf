@@ -6,14 +6,10 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
-#data "terraform_remote_state" "stack" {
-  #backend = "s3"
-  #config{
-    #bucket = "three-tier-architecture-bucket"
-    #key = "dev/terraform.tfstate"
-    #region="ap-southeast-2"
-  #}
-#}
+terraform {
+  backend "s3" {
+  }
+}
 
 # ------------------------------------------------------------------------------
 # RUNNING MODULES
@@ -30,25 +26,25 @@ module "network" {
   db_subnet_c_cidr      = "${var.db_subnet_c_cidr}"
 }
 
-module "web" {
-  source           = "./modules/web"
-  public_subnet_b  = "${module.network.public_subnet_b}"
-  public_subnet_c  = "${module.network.public_subnet_c}"
-  private_subnet_b = "${module.network.private_subnet_b}"
-  private_subnet_c = "${module.network.private_subnet_c}"
-  public_sg        = "${module.network.public_sg}"
-  private_sg       = "${module.network.private_sg}"
-}
+#module "web" {
+  #source           = "./modules/web"
+  #public_subnet_b  = "${module.network.public_subnet_b}"
+  #public_subnet_c  = "${module.network.public_subnet_c}"
+  #private_subnet_b = "${module.network.private_subnet_b}"
+  #private_subnet_c = "${module.network.private_subnet_c}"
+  #public_sg        = "${module.network.public_sg}"
+  #private_sg       = "${module.network.private_sg}"
+#}
 
-module "db" {
-  source              = "./modules/db"
-  db_subnet_b         = "${module.network.db_subnet_b}"
-  db_subnet_c         = "${module.network.db_subnet_c}"
-  db_security_group   = "${module.network.private_sg}"
-  username            = "${var.username}"
-  password            = "${var.password}"
-  instance_class      = "${var.instance_class}"
-  multi_az            = "${var.multi_az}"
-  allocated_storage   = "${var.allocated_storage}"
-  skip_final_snapshot = "${var.skip_final_snapshot}"
-}
+#module "db" {
+  #source              = "./modules/db"
+  #db_subnet_b         = "${module.network.db_subnet_b}"
+  #db_subnet_c         = "${module.network.db_subnet_c}"
+  #db_security_group   = "${module.network.private_sg}"
+  #username            = "${var.username}"
+  #password            = "${var.password}"
+  #instance_class      = "${var.instance_class}"
+  #multi_az            = "${var.multi_az}"
+  #allocated_storage   = "${var.allocated_storage}"
+  #skip_final_snapshot = "${var.skip_final_snapshot}"
+#}
