@@ -23,7 +23,12 @@ Run commands to deploy:
 
 [Learn more about Terraform commands here](https://www.terraform.io/docs/commands/index.html)
 
-## Inputs
+## Configuration files
+There are two example configuration files in the ```config/``` folder.  Each contains inputs for the main terraform module to run.
+ * dev: for development environment settings
+ * prod: for production like environment settings
+
+## Main terraform module inputs
 
 | Name                  | Description                                           | Type   | Default | Required |
 | ------                | -------------                                         | :----: | :-----: | :-----:  |
