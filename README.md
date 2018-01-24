@@ -12,7 +12,7 @@ Three modules that constructs our architecture:
 Setup:
 * [Install Terraform](https://www.terraform.io/intro/getting-started/install.html)
 * Setup your ```AWS_ACCESS_KEY_ID``` and ```AWS_SECRET_ACCESS_KEY``` environmental variables. (Assuming user have full permission)
-* [Run Three Tier Init with the corresponding env value](https://github.com/hchiao/three-tier-init)
+* [Run Three Tier Init with the corresponding env value to setup terraform backend with s3 bucket and dynamodb](https://github.com/hchiao/three-tier-init)
 * Clone this project
 
 Run commands to deploy:
