@@ -17,10 +17,11 @@ Setup:
 
 Run commands to deploy:
 * ```export env=dev (or prod)```
+* ```terraform get -update=true```
 * ```terraform init -backend-config=config/backend-${env}.conf -backend=true```
 * ```terraform apply -var-file=config/${env}.tfvars -var password=<db password> -lock=true```
 
-[Learn more Terraform command here](https://www.terraform.io/docs/commands/index.html)
+[Learn more about Terraform commands here](https://www.terraform.io/docs/commands/index.html)
 
 ## Inputs
 
@@ -46,3 +47,12 @@ Run commands to deploy:
 | ------       | -------------             |
 | elb_dns      | Elastic Load Balancer DNS |
 | rds_endpoint | RDS endpoint              |
+
+# References
+
+* https://github.com/BWITS/terraform-best-practices#run-terraform-from-docker-container
+* https://github.com/terraform-community-modules
+* https://opencredo.com/terraform-infrastructure-design-patterns/
+* https://github.com/terraform-providers/terraform-provider-aws/tree/master/examples/rds
+* https://github.com/gruntwork-io/terragrunt-infrastructure-modules-example
+
