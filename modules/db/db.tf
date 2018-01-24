@@ -1,5 +1,5 @@
 resource "aws_db_instance" "postgres_rds" {
-  identifier             = "mydb-rds"
+  identifier             = "three-tier-architecture-rds"
   storage_type           = "gp2"
   engine                 = "postgres"
   engine_version         = "9.6.5"
@@ -15,5 +15,5 @@ resource "aws_db_instance" "postgres_rds" {
 }
 
 resource "aws_db_subnet_group" "default" {
-  subnet_ids  = ["${var.db_subnet_b}", "${var.db_subnet_c}"]
+  subnet_ids = ["${var.db_subnet_b}", "${var.db_subnet_c}"]
 }

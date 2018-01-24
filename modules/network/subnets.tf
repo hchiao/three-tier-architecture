@@ -99,7 +99,6 @@ resource "aws_subnet" "db_subnet_c" {
   }
 }
 
-
 # ------------------------------------------------------------------------------
 # PRIVATE ROUTE TABLES
 # ------------------------------------------------------------------------------
@@ -108,7 +107,7 @@ resource "aws_route_table" "private_route_table_b" {
   vpc_id = "${aws_vpc.main_vpc.id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = "${aws_nat_gateway.nat_gw_b.id}"
   }
 
@@ -126,7 +125,7 @@ resource "aws_route_table" "private_route_table_c" {
   vpc_id = "${aws_vpc.main_vpc.id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = "${aws_nat_gateway.nat_gw_c.id}"
   }
 
@@ -139,4 +138,3 @@ resource "aws_route_table_association" "private_c" {
   subnet_id      = "${aws_subnet.private_subnet_c.id}"
   route_table_id = "${aws_route_table.private_route_table_c.id}"
 }
-

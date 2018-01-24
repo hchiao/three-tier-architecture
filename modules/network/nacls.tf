@@ -5,9 +5,10 @@
 
 resource "aws_network_acl" "public_acl" {
   vpc_id = "${aws_vpc.main_vpc.id}"
+
   subnet_ids = [
-      "${aws_subnet.public_subnet_b.id}",
-      "${aws_subnet.public_subnet_c.id}"
+    "${aws_subnet.public_subnet_b.id}",
+    "${aws_subnet.public_subnet_c.id}",
   ]
 
   ingress {
@@ -76,11 +77,12 @@ resource "aws_network_acl" "public_acl" {
 
 resource "aws_network_acl" "private_acl" {
   vpc_id = "${aws_vpc.main_vpc.id}"
+
   subnet_ids = [
-      "${aws_subnet.private_subnet_c.id}",
-      "${aws_subnet.private_subnet_b.id}",
-      "${aws_subnet.db_subnet_b.id}",
-      "${aws_subnet.db_subnet_c.id}"
+    "${aws_subnet.private_subnet_c.id}",
+    "${aws_subnet.private_subnet_b.id}",
+    "${aws_subnet.db_subnet_b.id}",
+    "${aws_subnet.db_subnet_c.id}",
   ]
 
   ingress {

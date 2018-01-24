@@ -4,7 +4,7 @@
 
 resource "aws_autoscaling_group" "autoscaling_group" {
   launch_configuration = "${aws_launch_configuration.launch_configuration.id}"
-  vpc_zone_identifier = ["${var.private_subnet_b}", "${var.private_subnet_c}"]
+  vpc_zone_identifier  = ["${var.private_subnet_b}", "${var.private_subnet_c}"]
   min_size             = 2
   max_size             = 10
   load_balancers       = ["${aws_elb.elb.name}"]

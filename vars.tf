@@ -1,41 +1,41 @@
 variable "env" {
   description = "The environment to deploy"
-  type = "string"
+  type        = "string"
 }
 
 variable "vpc_cidr" {
   description = "The cidr range for vpc"
-  type = "string"
+  type        = "string"
 }
 
 variable "public_subnet_b_cidr" {
   description = "The cidr range for public subnet b"
-  type = "string"
+  type        = "string"
 }
 
 variable "public_subnet_c_cidr" {
   description = "The cidr range for public subnet c"
-  type = "string"
+  type        = "string"
 }
 
 variable "private_subnet_b_cidr" {
   description = "The cidr range for private subnet b"
-  type = "string"
+  type        = "string"
 }
 
 variable "private_subnet_c_cidr" {
   description = "The cidr range for private subnet c"
-  type = "string"
+  type        = "string"
 }
 
 variable "db_subnet_b_cidr" {
   description = "The cidr range for db subnet b"
-  type = "string"
+  type        = "string"
 }
 
 variable "db_subnet_c_cidr" {
   description = "The cidr range for db subnet c"
-  type = "string"
+  type        = "string"
 }
 
 variable "username" {
