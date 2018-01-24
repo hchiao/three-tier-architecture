@@ -2,5 +2,7 @@ version: 0.1
 phases:
   build:
     commands:
-      - terraform init
-      - terraform apply
+      - export env=dev (or prod)
+      - terraform get -update=true
+      - terraform init -backend-config=config/backend-${env}.conf -backend=true
+      - terraform apply -var-file=config/${env}.tfvars -var password=<db password> -lock=true
